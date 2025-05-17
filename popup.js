@@ -4,11 +4,11 @@ document.getElementById("summarize").addEventListener("click",()=>{
 
     const summaryType = document.getElementById("summary-type").ariaValueMax;
 
-    resultDiv.innerHTML = '<div class="loader></div>';
+    result.innerHTML = '<div class="loader"></div>';
 
-    chrome.storage.sunc.get(["apikey"],({apikey})=>{
+    chrome.storage.sync.get(["apikey"],({apikey})=>{
         if(!apikey){
-            resultDiv.textContent = "No API key set. Click the gear icon to add one.";
+            result.textContent = "No API key set. Click the gear icon to add one.";
             return;
         }
 
@@ -18,15 +18,15 @@ document.getElementById("summarize").addEventListener("click",()=>{
             {type: "GET_ARTICLE_TEXT"},
            async ({text})=>{
                if(!text){
-                resultDiv.textContent = "Couldn't extract text from this page.";
+                result.textContent = "Couldn't extract text from this page.";
                 return;
                }
 
                try{
                 const summary = await getGeminiSummary(text,summaryType,apikey);
-                resultDiv.textContent = summary;
+                result.textContent = summary;
                }catch(error){
-                resultDiv.textContent = "Error";
+                result.textContent = "Error";
                }
             }
         );
