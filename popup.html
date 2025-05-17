@@ -3,23 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>AI Summarizer</title>
 </head>
-<body>
-    <h2>Summary</h2>
-    <div>
-   <select id="summary-type">
-    <option value="brief">Brief</option>
-    <option value="detailed">Detailed</option>
-    <option value="bullets">Bullet Points</option>
-   </select>
-</div>
-   <button id="Summarize">Summarize</button>
-   <button id="copy">Copy</button>
-
-   <pre id="result">Select a type and click Summarize</pre>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">AI Summarizer</h2>
+        
+        <div class="mb-4">
+            <label for="summary-type" class="block text-sm font-medium text-gray-700 mb-1">Summary Type</label>
+            <select id="summary-type" class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="brief">Brief</option>
+                <option value="detailed">Detailed</option>
+                <option value="bullets">Bullet Points</option>
+            </select>
+        </div>
+        
+        <div class="flex space-x-3 mb-6">
+            <button id="summarize" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Summarize
+            </button>
+            <button id="copy" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                Copy
+            </button>
+        </div>
+        
+        <div class="bg-gray-100 rounded-lg p-4">
+            <h3 class="text-sm font-medium text-gray-700 mb-2">Result</h3>
+            <pre id="result" class="text-sm text-gray-800 whitespace-pre-wrap">Select a type and click Summarize</pre>
+        </div>
+    </div>
     
-   <script src="popup.js" ></script>
+    <script src="popup.js"></script>
 </body>
 </html>
