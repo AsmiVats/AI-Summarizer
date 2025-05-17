@@ -1,17 +1,52 @@
 
 document.getElementById("summarize").addEventListener("click",()=>{
     const result = document.getElementById("result");
-    result.textContent = "Extracting text ...";
 
-    chrome.tabs.query({active:true,currentWindow:true},([tab])=>{
+    const summaryType = document.getElementById("summary-type").ariaValueMax;
+
+    resultDiv.innerHTML = '<div class="loader></div>';
+
+    chrome.storage.sunc.get(["apikey"],({apikey})=>{
+        if(!apikey){
+            resultDiv.textContent = "No API key set. Click the gear icon to add one.";
+            return;
+        }
+
+        chrome.tabs.query({active:true,currentWindow:true},([tab])=>{
         chrome.tabs.sendMessage(
             tab.id,
             {type: "GET_ARTICLE_TEXT"},
-            ({text})=>{
-                result.textContent = text
-                ? text.slice(0,300) + "..."
-                :"No article text found.";
+           async ({text})=>{
+               if(!text){
+                resultDiv.textContent = "Couldn't extract text from this page.";
+                return;
+               }
+
+               try{
+                const summary = await getGeminiSummary(text,summaryType,apikey);
+                resultDiv.textContent = summary;
+               }catch(error){
+                resultDiv.textContent = "Error";
+               }
             }
         );
     });
+
+    });
+
+    
 });
+
+async function getGeminiSummary(rawText,type,apiKey) {
+    const max = 20000;
+    const text = rawText.length >max ? rawText.slice(0,max)+"...":rawText;
+
+    const promptMap = {
+        brief:`Summarize in 2-3 sentences:\n\n${text}`,
+        detailed:`Gice a detailed summary:\n\n${text}`,
+        bullets:`Summarizr in 5-7  bullet points 
+        (start each line with "->"):\n\n${text}`
+    };
+
+    
+}
