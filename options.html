@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Options</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Options</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <h1>AI Summary Settings</h1>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center px-4">
+  <div class="bg-white shadow-xl rounded-xl p-6 w-full max-w-lg">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">🔧 AI Summary Settings</h1>
 
-  <div class="form-group">
-    <label for="api-key">Gemini API Key</label>
-    <input type="text" id="api-key" placeholder="Enter your Gemini Key"/>
+    <div class="mb-4">
+      <label for="api-key" class="block text-sm font-medium text-gray-700 mb-1">Gemini API Key</label>
+      <input 
+        type="text" 
+        id="api-key" 
+        placeholder="Enter your Gemini Key" 
+        class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
 
-    <p>
-        You can get your API key from 
-        <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studios</a>
+    <p class="text-sm text-gray-600 mb-6">
+      You can get your API key from 
+      <a 
+        href="https://makersuite.google.com/app/apikey" 
+        target="_blank" 
+        class="text-blue-600 hover:underline"
+      >
+        Google AI Studio
+      </a>
+    </p>
+
+    <button 
+      id="save-button" 
+      class="bg-blue-600 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      Save Settings
+    </button>
+
+    <p 
+      id="success-message" 
+      class="success-message text-green-600 text-sm mt-4 hidden"
+    >
+      ✅ Settings saved successfully!
     </p>
   </div>
-
-  <button id="save-button">Save Settings</button>
-  <p id="success-message" class="success-message">Settings saved successfully!!</p>
 
   <script src="options.js"></script>
 </body>
